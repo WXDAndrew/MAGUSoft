@@ -79,7 +79,7 @@ int main()
 
     // build and compile shaders
     Shader ourShader("shaders/modelo_vertexshader.vs", "shaders/modelo_fragmentshader.fs");
-    Shader lightCubeShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
+    //Shader lightCubeShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
 
     // load models
     Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/city/city.obj");
@@ -169,6 +169,7 @@ int main()
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
 
+        /*
         // also draw the lamp object
         lightCubeShader.use();
         lightCubeShader.setMat4("projection", projection);
@@ -177,7 +178,7 @@ int main()
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
         lightCubeShader.setMat4("model", model);
-
+        */
         // render the cube
         // lightCube.Draw(lightCubeShader); // You need to have a model for the light cube or render a simple cube here
 
