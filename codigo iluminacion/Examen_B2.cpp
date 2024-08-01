@@ -86,9 +86,7 @@ int main()
     // build and compile shaders
     Shader ourShader("shaders/modelo_vertexshader.vs", "shaders/modelo_fragmentshader.fs");
     //Shader lightCubeShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
-    // 
-    //LA VIDA ES BELLA
-    // 
+
     // load models
     Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
 
