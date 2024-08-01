@@ -10,6 +10,9 @@
 #include <learnopengl/model.h>
 
 #include <iostream>
+//#include <vector>
+#include <thread>   // Para std::this_thread::sleep_for
+#include <chrono>   // Para std::chrono::milliseconds
 
 #define STB_IMAGE_IMPLEMENTATION 
 #include <learnopengl/stb_image.h>
@@ -33,6 +36,9 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
+//Linterna encendida
+glm::vec3 lightF(1.0f, 1.0f, 1.0f); // Color de la luz por defecto
+bool lightOn = true; // Estado de la luz
 
 
 int main()
@@ -82,14 +88,14 @@ int main()
     //Shader lightCubeShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
 
     // load models
-    Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/city/city.obj");
+    Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // lighting
     glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
-    glm::vec3 dirLightDirection(0.0f, 500.0f, 0.0f);
+    glm::vec3 dirLightDirection(5005.0f, 5005.0f, -5000.0f);
     glm::vec3 pointLightPositions[] = {
         glm::vec3(0.0f, 10000.0f, 0.0f),
         glm::vec3(0.0f, 10000.0f, 0.0f),
@@ -97,8 +103,9 @@ int main()
         glm::vec3(0.0f, 10000.0f, 0.0f)
     };
 
-    camera.MovementSpeed = 50; //Optional. Modify the speed of the camera
+    camera.MovementSpeed = 10; //Optional. Modify the speed of the camera
 
+   
     // render loop
     while (!glfwWindowShouldClose(window))
     {
@@ -124,50 +131,52 @@ int main()
         ourShader.setFloat("material.shininess", 32.0f);
 
         // set light properties
-        /*
-        // directional light
+        
+        // directional light ******LUZ DE LA LUNA
         ourShader.setVec3("dirLight.direction", dirLightDirection);
-        ourShader.setVec3("dirLight.ambient", 0.1f, 0.1f, 0.1f);
-        ourShader.setVec3("dirLight.diffuse", 0.5f, 0.5f, 0.5f);
-        ourShader.setVec3("dirLight.specular", 1.0f, 1.0f, 1.0f);
-        */
+        ourShader.setVec3("dirLight.ambient", 0.3f, 0.3f, 0.3f);  
+        ourShader.setVec3("dirLight.diffuse", 0.1f, 0.1f, 0.1f);
+        ourShader.setVec3("dirLight.specular", 0.02f, 0.02f, 0.05f);
+        
          
-        // point lights
+        // point lights****PARA LAS LAMPARAS
         for (unsigned int i = 0; i < 4; i++)
         {
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].position", pointLightPositions[i]);
-            ourShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", 0.1f, 0.1f, 0.1f);
-            ourShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", 0.8f, 0.8f, 0.8f);
-            ourShader.setVec3("pointLights[" + std::to_string(i) + "].specular", 1.0f, 1.0f, 1.0f);
+            ourShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", 0.0f, 0.0f, 0.0f);
+            ourShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", 0.0f, 0.0f, 0.0f);
+            ourShader.setVec3("pointLights[" + std::to_string(i) + "].specular", 0.0f, 0.0f, 0.0f);
             ourShader.setFloat("pointLights[" + std::to_string(i) + "].constant", 1.0f);
             ourShader.setFloat("pointLights[" + std::to_string(i) + "].linear", 0.09f);
             ourShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", 0.032f);
         }
         
-        // spotlight
+        // spotlight******LINTERNA
         ourShader.setVec3("spotLight.position", camera.Position);
         ourShader.setVec3("spotLight.direction", camera.Front);
         ourShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
         ourShader.setFloat("spotLight.outerCutOff", glm::cos(glm::radians(15.0f)));
         ourShader.setVec3("spotLight.ambient", 0.0f, 0.0f, 0.0f);
-        ourShader.setVec3("spotLight.diffuse", 1.0f, 1.0f, 1.0f);
-        ourShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
+        ourShader.setVec3("spotLight.diffuse", lightF);
+        ourShader.setVec3("spotLight.specular", lightF);
         ourShader.setFloat("spotLight.constant", 1.0f);
-        ourShader.setFloat("spotLight.linear", 0.0009f);
-        ourShader.setFloat("spotLight.quadratic", 0.00032f);
+        ourShader.setFloat("spotLight.linear", 0.009f);
+        ourShader.setFloat("spotLight.quadratic", 0.0032f);
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
         glm::mat4 view = camera.GetViewMatrix();
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
-
+        
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, -30.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.05f));    // it's a bit too big for our scene, so scale it down
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
+        
+
 
         /*
         // also draw the lamp object
@@ -206,6 +215,13 @@ void processInput(GLFWwindow* window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
+    {
+        lightOn = !lightOn; // Cambia el estado de la luz
+        lightF = lightOn ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(0.0f, 0.0f, 0.0f); // Prende o apaga la luz la luz
+        //std::this_thread::sleep_for(std::chrono::milliseconds(200)); // delay entre clicks
+    }
+    
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -238,8 +254,3 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(yoffset);
 }
-
-
-
-
-
