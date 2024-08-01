@@ -218,7 +218,9 @@ void processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
     {
         lightOn = !lightOn; // Cambia el estado de la luz
-        lightF = lightOn ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(0.0f, 0.0f, 0.0f); // Prende o apaga la luz la luz
+        lightF = lightOn ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(0.0f, 0.0f, 0.0f); // Prende o apaga la luz 
+        
+        //***HABILITAR SI NO FUNCIONA CORRECTAMENTE EL ENCENDIDO Y APAGADO
         //std::this_thread::sleep_for(std::chrono::milliseconds(200)); // delay entre clicks
     }
     
