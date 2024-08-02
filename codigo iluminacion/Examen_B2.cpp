@@ -16,7 +16,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION 
 #include <learnopengl/stb_image.h>
-// Examen B2
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -85,10 +85,10 @@ int main()
 
     // build and compile shaders
     Shader ourShader("shaders/modelo_vertexshader.vs", "shaders/modelo_fragmentshader.fs");
-    //Shader lightCubeShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
+    //Shader lCShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
 
     // load models
-    Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
+    Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/lamp4/lamp4.obj");
 
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -97,14 +97,14 @@ int main()
     glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
     glm::vec3 dirLightDirection(5005.0f, 5005.0f, -5000.0f);
     glm::vec3 pointLightPositions[] = {
-        glm::vec3(0.0f, 10000.0f, 0.0f),
-        glm::vec3(0.0f, 10000.0f, 0.0f),
-        glm::vec3(0.0f, 10000.0f, 0.0f),
-        glm::vec3(0.0f, 10000.0f, 0.0f)
+        glm::vec3(-0.0266329, 5.87273, 0.0155637),
+        glm::vec3(10.0029, 5.6068, 0.0120746),
+        glm::vec3(0.0, 50000.0, 0.0),
+        glm::vec3(0.0, 50000.0, 0.0)
     };
 
-    camera.MovementSpeed = 10; //Optional. Modify the speed of the camera
-
+    camera.MovementSpeed = 1; //Optional. Modify the speed of the camera
+    glm::vec3 lastCameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
    
     // render loop
     while (!glfwWindowShouldClose(window))
@@ -119,6 +119,7 @@ int main()
 
         // render
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
+        //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
@@ -134,9 +135,9 @@ int main()
         
         // directional light ******LUZ DE LA LUNA
         ourShader.setVec3("dirLight.direction", dirLightDirection);
-        ourShader.setVec3("dirLight.ambient", 0.3f, 0.3f, 0.3f);  
+        ourShader.setVec3("dirLight.ambient", 0.1f, 0.1f, 0.1f);  ///AUMENTAR VALORES PARA MAS BRILLO AMBIENTAL
         ourShader.setVec3("dirLight.diffuse", 0.1f, 0.1f, 0.1f);
-        ourShader.setVec3("dirLight.specular", 0.02f, 0.02f, 0.05f);
+        ourShader.setVec3("dirLight.specular", 0.2f, 0.2f, 0.5f);
         
          
         // point lights****PARA LAS LAMPARAS
@@ -144,11 +145,11 @@ int main()
         {
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].position", pointLightPositions[i]);
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", 0.0f, 0.0f, 0.0f);
-            ourShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", 0.0f, 0.0f, 0.0f);
-            ourShader.setVec3("pointLights[" + std::to_string(i) + "].specular", 0.0f, 0.0f, 0.0f);
-            ourShader.setFloat("pointLights[" + std::to_string(i) + "].constant", 1.0f);
-            ourShader.setFloat("pointLights[" + std::to_string(i) + "].linear", 0.09f);
-            ourShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", 0.032f);
+            ourShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", 1.0f, 1.0f, 1.0f);
+            ourShader.setVec3("pointLights[" + std::to_string(i) + "].specular", 1.0f, 1.0f, 1.0f);
+            ourShader.setFloat("pointLights[" + std::to_string(i) + "].constant", 0.5f);
+            ourShader.setFloat("pointLights[" + std::to_string(i) + "].linear", 0.009f);
+            ourShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", 0.0032f);
         }
         
         // spotlight******LINTERNA
@@ -172,12 +173,28 @@ int main()
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));    // it's a bit too big for our scene, so scale it down
+        model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));    // it's a bit too big for our scene, so scale it down
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
+
+        glm::mat4 model2 = glm::mat4(1.0f);
+        model2 = glm::translate(model2, glm::vec3(10.0f, 0.0f, 0.0f)); // translate it to a different position
+        model2 = glm::scale(model2, glm::vec3(2.0f, 2.0f, 2.0f));    // scale it down
+        ourShader.setMat4("model", model2);
+        ourModel.Draw(ourShader);
+        
+        // Print the camera position
+        //printCameraPosition(camera);
         
 
-
+        if (camera.Position != lastCameraPos)
+        {
+            std::cout << "Camera Position: ("
+                << camera.Position.x << ", "
+                << camera.Position.y << ", "
+                << camera.Position.z << ")\n";
+            lastCameraPos = camera.Position;
+        }
         /*
         // also draw the lamp object
         lightCubeShader.use();
@@ -218,9 +235,8 @@ void processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS)
     {
         lightOn = !lightOn; // Cambia el estado de la luz
-        lightF = lightOn ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(0.0f, 0.0f, 0.0f); // Prende o apaga la luz 
-        
-        //***HABILITAR SI NO FUNCIONA CORRECTAMENTE EL ENCENDIDO Y APAGADO
+        lightF = lightOn ? glm::vec3(1.0f, 1.0f, 1.0f) : glm::vec3(0.0f, 0.0f, 0.0f); // Prende o apaga la luz la luz
+        //*******SI FALLA LA LINTERNA DESCOMENTAR LA SIGUIENTE LINEA
         //std::this_thread::sleep_for(std::chrono::milliseconds(200)); // delay entre clicks
     }
     
