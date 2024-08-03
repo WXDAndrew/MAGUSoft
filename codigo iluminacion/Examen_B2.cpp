@@ -88,8 +88,9 @@ int main()
     //Shader lCShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
 
     // load models
-    Model ourModel("C:/Users/Det-Pc/Desktop/Computacion Grafica/OpenGL/OpenGL/model/lamp4/lamp4.obj");
-
+    Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
+    Model ourModel2("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mounstro/mounstro.obj");
+    Model ourModel3("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/armaconlinterna/arma.obj");
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -182,6 +183,27 @@ int main()
         model2 = glm::scale(model2, glm::vec3(2.0f, 2.0f, 2.0f));    // scale it down
         ourShader.setMat4("model", model2);
         ourModel.Draw(ourShader);
+        //Mounstro
+        glm::mat4 model2 = glm::mat4(1.0f);
+        model2 = glm::translate(model2, glm::vec3(23.0f, 10.0f, -28.0f));
+        model2 = glm::scale(model2, glm::vec3(100.0f, 100.0f, 100.0f));
+        float angle = glm::radians(45.0f);
+        model2 = glm::rotate(model2, angle, glm::vec3(0.0f, 1.0f, 0.0f));
+        ourShader.use();
+        ourShader.setMat4("model", model2);
+        ourModel2.Draw(ourShader);
+        //Arma
+        glm::mat4 gunModel = glm::mat4(1.0f);
+        glm::vec3 gunPosition = camera.Position + camera.Front * 5.0f + camera.Right * (1.5f + gunOffsetX) + camera.Up * (-0.8f + gunOffsetY);
+        gunModel = glm::translate(gunModel, gunPosition);
+        gunModel = glm::rotate(gunModel, glm::radians(-camera.Yaw + 270), glm::vec3(0.0f, 1.0f, 0.0f));
+        gunModel = glm::rotate(gunModel, glm::radians(camera.Pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+        gunModel = glm::rotate(gunModel, gunOffsetX * 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
+        gunModel = glm::rotate(gunModel, gunOffsetY * 0.5f, glm::vec3(1.0f, 0.0f, 0.0f));
+
+        gunModel = glm::scale(gunModel, glm::vec3(0.1f, 0.1f, 0.1f));
+        ourShader.setMat4("model", gunModel);
+        ourModel3.Draw(ourShader);
         
         // Print the camera position
         //COMENTAR ESTA PARTE PARA QUE NO SE IMPRIMAN COORDENADAS
@@ -264,6 +286,11 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     lastY = ypos;
 
     camera.ProcessMouseMovement(xoffset, yoffset);
+    const float sensitivity = 0.001f; 
+    gunOffsetX += xoffset * sensitivity;
+    gunOffsetY += yoffset * sensitivity;
+    gunOffsetX = glm::clamp(gunOffsetX, -0.1f, 0.1f);
+    gunOffsetY = glm::clamp(gunOffsetY, -0.1f, 0.1f);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
