@@ -184,9 +184,8 @@ int main()
         ourModel.Draw(ourShader);
         
         // Print the camera position
-        //printCameraPosition(camera);
-        
-
+        //COMENTAR ESTA PARTE PARA QUE NO SE IMPRIMAN COORDENADAS
+    
         if (camera.Position != lastCameraPos)
         {
             std::cout << "Camera Position: ("
