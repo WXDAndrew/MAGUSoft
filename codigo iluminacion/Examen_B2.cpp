@@ -95,16 +95,58 @@ int main()
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // lighting
-    glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
-    glm::vec3 dirLightDirection(5005.0f, 5005.0f, -5000.0f);
-    glm::vec3 pointLightPositions[] = {
-        glm::vec3(-0.0266329, 5.87273, 0.0155637),
-        glm::vec3(10.0029, 5.6068, 0.0120746),
-        glm::vec3(0.0, 50000.0, 0.0),
-        glm::vec3(0.0, 50000.0, 0.0)
-    };
+     float a = 6.2;
+     glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+     glm::vec3 dirLightDirection((238.684, 554.131, 374.902));
+     glm::vec3 pointLightPositions[] = {
+         glm::vec3(67.4885, a, -24.4653),
+         glm::vec3(50.1336, a, -40.9756),
+         glm::vec3(57.476, a, -24.4264),
+         glm::vec3(35.7485, a, -23.374),
+         glm::vec3(42.0412, a, -6.00715),
+         glm::vec3(26.2719, a, -9.03249),
+         glm::vec3(33.732, a, 8.56284),
+         glm::vec3(28.8901, a, 25.8085),
+         glm::vec3(15.2973, a, 25.6666),
+         glm::vec3(26.6795, a, 42.8372),
+         glm::vec3(13.1852, a, 42.5504),
+         glm::vec3(13.232, a, 59.9155),
+         glm::vec3(26.1219, a, 60.4521),
+         glm::vec3(26.1037, a, 77.6029),
+         glm::vec3(15.595, a, 94.5348),
+         glm::vec3(26.1621, a, 96.3266),
+         glm::vec3(36.1572, a, 96.3039),
+         glm::vec3(26.1296, a, 112.234),
+         glm::vec3(15.5845, a, 114.604),
+         glm::vec3(15.5379, a, 132.134),
+         glm::vec3(26.1238, a, 131.606),
+         glm::vec3(26.156, a, 148.905),
+         glm::vec3(15.5635, a, 148.835),
+         glm::vec3(26.1346, a, 165.79),
+         glm::vec3(15.533, a, 168.69),
+         glm::vec3(26.4672, a, 182.651),
+         glm::vec3(16.0294, a, 198.721),
+         glm::vec3(26.931, a, 202.744),
+         glm::vec3(16.0296, a, 220.602),
+         glm::vec3(16.063, a, 235.319),
+         glm::vec3(29.3722, a, 234.931),
+         glm::vec3(16.4238, a, 252.448),
+         glm::vec3(29.2886, a, 254.391),
+         glm::vec3(14.6747, a, 269.381),
+         glm::vec3(27.8113, a, 271.905),
+         glm::vec3(23.8671, a, 288.899),
+         glm::vec3(10.5307, a, 286.794),
+         glm::vec3(17.0886, a, 306.348),
+         glm::vec3(1.57443, a, 304.232),
+         glm::vec3(6.06977, a, 323.443),
+         glm::vec3(-12.3373, a, 321.888),
+         glm::vec3(-6.37879, a, 338.864),
+         glm::vec3(-22.3302, a, 321.898)
+     };
+   
+    
 
-    camera.MovementSpeed = 1; //Optional. Modify the speed of the camera
+    camera.MovementSpeed = 10; //Optional. Modify the speed of the camera
     glm::vec3 lastCameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
    
     // render loop
@@ -120,15 +162,13 @@ int main()
 
         // render
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
-        //glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //glClearColor(1.0f, 1.0f, 1.0f, 1.0f); 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
         ourShader.use();
 
         // set material properties
-        //ourShader.setInt("material.diffuse", 0);
-        //ourShader.setInt("material.specular", 1);
         ourShader.setVec3("viewPos", camera.Position);
         ourShader.setFloat("material.shininess", 32.0f);
 
@@ -137,20 +177,20 @@ int main()
         // directional light ******LUZ DE LA LUNA
         ourShader.setVec3("dirLight.direction", dirLightDirection);
         ourShader.setVec3("dirLight.ambient", 0.1f, 0.1f, 0.1f);  ///AUMENTAR VALORES PARA MAS BRILLO AMBIENTAL
-        ourShader.setVec3("dirLight.diffuse", 0.1f, 0.1f, 0.1f);
-        ourShader.setVec3("dirLight.specular", 0.2f, 0.2f, 0.5f);
+        ourShader.setVec3("dirLight.diffuse", 0.1f, 0.1f, 0.25f);
+        ourShader.setVec3("dirLight.specular", 0.1f, 0.1f, 0.25f);
         
          
         // point lights****PARA LAS LAMPARAS
-        for (unsigned int i = 0; i < 4; i++)
+        for (unsigned int i = 0; i < 43; i++)
         {
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].position", pointLightPositions[i]);
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", 0.0f, 0.0f, 0.0f);
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].diffuse", 1.0f, 1.0f, 1.0f);
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].specular", 1.0f, 1.0f, 1.0f);
-            ourShader.setFloat("pointLights[" + std::to_string(i) + "].constant", 0.5f);
-            ourShader.setFloat("pointLights[" + std::to_string(i) + "].linear", 0.009f);
-            ourShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", 0.0032f);
+            ourShader.setFloat("pointLights[" + std::to_string(i) + "].constant", 0.8f);
+            ourShader.setFloat("pointLights[" + std::to_string(i) + "].linear", 0.09f);
+            ourShader.setFloat("pointLights[" + std::to_string(i) + "].quadratic", 0.032f);
         }
         
         // spotlight******LINTERNA
@@ -216,19 +256,7 @@ int main()
                 << camera.Position.z << ")\n";
             lastCameraPos = camera.Position;
         }
-        /*
-        // also draw the lamp object
-        lightCubeShader.use();
-        lightCubeShader.setMat4("projection", projection);
-        lightCubeShader.setMat4("view", view);
-        model = glm::mat4(1.0f);
-        model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-        lightCubeShader.setMat4("model", model);
-        */
-        // render the cube
-        // lightCube.Draw(lightCubeShader); // You need to have a model for the light cube or render a simple cube here
-
+    
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         glfwSwapBuffers(window);
         glfwPollEvents();
