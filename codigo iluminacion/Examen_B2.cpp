@@ -91,8 +91,15 @@ int main()
     Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
     Model ourModel2("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mounstro/mounstro.obj");
     Model ourModel3("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/armaconlinterna/arma.obj");
+    //Model ourModel1("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/carroviejo1/carroviejo.obj");
+    //Model ourModel4("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/escombros/escombros.obj");
+    //Model ourModel5("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/damagecar/damagecar.obj");
+    //Model ourModel6("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/blackcar/blackcar.obj");
+    
+    
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 
     // lighting
      float a = 6.2;
@@ -144,7 +151,38 @@ int main()
          glm::vec3(-22.3302, a, 321.898)
      };
    
-    
+     glm::vec3 carPositions[] = {
+         //carroviejo
+         glm::vec3(18.0f, 1.7f, -28.0f),
+         glm::vec3(9.0f, 0.0f, 20.0f),
+         glm::vec3(9.0f, 0.01f, 110.0f),
+         glm::vec3(4.5f,  1.7f, 150.0f),
+         //blackcar
+         glm::vec3(6.7f,  1.58f, 0.0f),
+         glm::vec3(6.7f,  -0.1f, 80.0f),
+         glm::vec3(16.0f, 1.7f, 140.0f),
+         glm::vec3(-6.0f, 0.0f, 170.0f),
+     };
+
+     glm::vec3 rotationAngles[] = {
+         //carroviejo
+         glm::vec3(10.0f, 0.0f, 180.0f), // Ángulos para el primer modelo
+         glm::vec3(0.0f,  0.0f, 0.01f), // Ángulos para el segundo modelo
+         glm::vec3(0.0f,  0.0f, 0.01f), // Ángulos para el tercer modelo
+         glm::vec3(0.0f,  0.0f, 130.0f), // Ángulos para el cuarto modelo
+         //blackcar
+         glm::vec3(50.0f, 90.0f, 90.0f),
+         glm::vec3(0.0f,  0.0f, 0.01f),
+         glm::vec3(-102.0f, 0.0f, 60.0f),
+         glm::vec3(0.0f,  0.0f, 0.01f),
+     };
+
+     glm::vec3 escombrosPosition[] = {
+         glm::vec3(16.0f, 1.2f, 87.0f),
+         glm::vec3(16.0f, 1.2f, 45.0f),
+         glm::vec3(16.0f, 1.2f, 25.0f),
+         glm::vec3(-6.0f, 1.2f, 137.0f)
+     };
 
     camera.MovementSpeed = 10; //Optional. Modify the speed of the camera
     glm::vec3 lastCameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -211,7 +249,7 @@ int main()
         ourShader.setMat4("projection", projection);
         ourShader.setMat4("view", view);
         
-        // render the loaded model
+        // Renderizar el escenario
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));    // it's a bit too big for our scene, so scale it down
@@ -240,6 +278,64 @@ int main()
         ourShader.setMat4("model", gunModel);
         ourModel3.Draw(ourShader);
         
+        /*
+        // Bucle para renderizar un modelo en cada posición del arreglo
+        for (int i = 0; i < 4; ++i) {
+
+            //bluecar
+            glm::mat4 model1 = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            model1 = glm::translate(model1, carPositions[i]);
+            // Aplicar una rotación diferente a cada modelo
+            float angleX = glm::radians(rotationAngles[i].x);
+            float angleY = glm::radians(rotationAngles[i].y);
+            float angleZ = glm::radians(rotationAngles[i].z);
+            // Combinar rotaciones en los tres ejes
+            model1 = glm::rotate(model1, angleX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotación alrededor del eje X
+            model1 = glm::rotate(model1, angleY, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotación alrededor del eje Y
+            model1 = glm::rotate(model1, angleZ, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotación alrededor del eje Z
+            // Escalar el modelo
+            model1 = glm::scale(model1, glm::vec3(0.01f, 0.01f, 0.01f));
+            ourShader.use();
+            ourShader.setMat4("model", model1);
+            ourModel1.Draw(ourShader);
+
+            //blackcar
+            glm::mat4 black = glm::mat4(1.0f);
+            black = glm::translate(black, carPositions[i + 4]);
+            float angle1 = glm::radians(rotationAngles[i+4].x);
+            float angle2 = glm::radians(rotationAngles[i+4].y);
+            float angle3 = glm::radians(rotationAngles[i+4].z);
+            black = glm::rotate(black, angle1, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotación alrededor del eje X
+            black = glm::rotate(black, angle2, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotación alrededor del eje Y
+            black = glm::rotate(black, angle3, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotación alrededor del eje Z
+            black = glm::scale(black, glm::vec3(1.0f, 1.0f, 1.0f));
+            ourShader.use();
+            ourShader.setMat4("model", black);
+            ourModel6.Draw(ourShader);
+        }
+
+        //damagecar
+        glm::mat4 damage = glm::mat4(1.0f);
+        damage = glm::translate(damage, glm::vec3(6.5f, -0.1f, 40.0f));
+        damage = glm::scale(damage, glm::vec3(1.0f, 1.0f, 1.0f));
+        ourShader.use();
+        ourShader.setMat4("model", damage);
+        ourModel5.Draw(ourShader);
+
+
+        //Escombros
+        for (int j = 0; j < 4; ++j) {
+            glm::mat4 escombros = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            escombros = glm::translate(escombros, escombrosPosition[j]);
+            // Escalar el modelo
+            escombros = glm::scale(escombros, glm::vec3(0.1f, 0.1f, 0.1f));
+            ourShader.use();
+            ourShader.setMat4("model", escombros);
+            ourModel4.Draw(ourShader);
+        }
+        */
         // Print the camera position
         //COMENTAR ESTA PARTE PARA QUE NO SE IMPRIMAN COORDENADAS
     
