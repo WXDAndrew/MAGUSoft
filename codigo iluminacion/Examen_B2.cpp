@@ -89,12 +89,15 @@ int main()
 
     // load models
     //Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mezcla4/mezcla4.obj");
-    Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
+    Model ourModel0("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
     Model ourModel1("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/armaconlinterna/arma.obj");
     //Model ourModel2("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/escombros/escombros.obj");
     //Model ourModel3("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/carroviejo1/carroviejo.obj");
     //Model ourModel4("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/blackcar/blackcar.obj");
     //Model ourModel5("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/damagecar/damagecar.obj");
+    Model ourModel6("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/portal3/portal3.obj");
+    Model ourModel7("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/dragon/dragon.obj");
+    Model ourModel8("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/godzilla/godzilla.obj");
     
     
     // draw in wireframe
@@ -256,15 +259,6 @@ int main()
         ourShader.setMat4("model", model);
         ourModel.Draw(ourShader);
 
-        //Mounstro
-        glm::mat4 model2 = glm::mat4(1.0f);
-        model2 = glm::translate(model2, glm::vec3(23.0f, 10.0f, -28.0f));
-        model2 = glm::scale(model2, glm::vec3(100.0f, 100.0f, 100.0f));
-        float angle = glm::radians(45.0f);
-        model2 = glm::rotate(model2, angle, glm::vec3(0.0f, 1.0f, 0.0f));
-        ourShader.use();
-        ourShader.setMat4("model", model2);
-        ourModel2.Draw(ourShader);
         //Arma
         glm::mat4 gunModel = glm::mat4(1.0f);
         glm::vec3 gunPosition = camera.Position + camera.Front * 5.0f + camera.Right * (1.5f + gunOffsetX) + camera.Up * (-0.8f + gunOffsetY);
@@ -326,7 +320,6 @@ int main()
             ourShader.setMat4("model", black);
             ourModel4.Draw(ourShader);
         }
-
         //damagecar
         glm::mat4 damage = glm::mat4(1.0f);
         damage = glm::translate(damage, glm::vec3(6.5f, -0.1f, 40.0f));
@@ -335,6 +328,37 @@ int main()
         ourShader.setMat4("model", damage);
         ourModel5.Draw(ourShader);
         */
+      //portal
+        float angle = glfwGetTime() * 50.0f; // Ángulo de rotación negativo para girar en sentido horario
+        glm::mat4 modelP = glm::mat4(1.0f);
+        modelP = glm::translate(modelP, glm::vec3(-5.0f, 15.0f, 0.0f)); // Mantener en el centro de la escena
+        modelP = glm::rotate(modelP, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotación alrededor del eje Y
+        modelP = glm::scale(modelP, glm::vec3(1.0f, 1.0f, 1.0f)); // Escala normal para el primer modelo
+        ourShader.use(); // Asegúrate de usar el shader correcto
+        ourShader.setMat4("model", modelP);
+        ourModel6.Draw(ourShader);
+        //dragon
+        float time = glfwGetTime(); // Obtén el tiempo actual
+        float amplitude = 5.0f; // Amplitud del movimiento hacia arriba y hacia abajo
+        float frequency = 2.5f; // Frecuencia del movimiento (cuán rápido oscila)
+
+        glm::mat4 modelD = glm::mat4(1.0f);
+        float yOffset = amplitude * sin(frequency * time); // Cálculo del desplazamiento en Y basado en una función seno
+        modelD = glm::translate(modelD, glm::vec3(-5.0f, 25.0f + yOffset, -1.0f)); // Mantener en el centro de la escena con movimiento oscilante
+        modelD = glm::rotate(modelD, glm::radians(35.0f), glm::vec3(1.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
+        modelD = glm::scale(modelD, glm::vec3(5.0f, 5.0f, 5.0f)); // Escala normal para el primer modelo
+        ourShader.use(); // Asegúrate de usar el shader correcto
+        ourShader.setMat4("model", modelD);
+        ourModel7.Draw(ourShader);
+        //godzilla
+        glm::mat4 modelG = glm::mat4(1.0f);
+        float yOffset1 = 2.5 * sin(2 * glfwGetTime()); // Cálculo del desplazamiento en Y basado en una función seno
+        modelG = glm::translate(modelG, glm::vec3(20.0f, -90.0f + yOffset1, -80.0f)); // Mantener en el centro de la escena
+        modelG = glm::rotate(modelG, glm::radians(45.0f), glm::vec3(.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
+        modelG = glm::scale(modelG, glm::vec3(85.0f, 85.0f, 85.0f)); // Escala normal para el primer modelo
+        ourShader.use(); // Asegúrate de usar el shader correcto
+        ourShader.setMat4("model", modelG);
+        ourModel8.Draw(ourShader);
         // Print the camera position
         //COMENTAR ESTA PARTE PARA QUE NO SE IMPRIMAN COORDENADAS
     
