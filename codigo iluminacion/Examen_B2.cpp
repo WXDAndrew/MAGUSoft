@@ -98,6 +98,9 @@ int main()
     Model ourModel6("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/portal3/portal3.obj");
     Model ourModel7("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/dragon/dragon.obj");
     Model ourModel8("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/godzilla/godzilla.obj");
+    Model ourModel9("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/soldado1/soldado1.obj");
+    Model ourModel10("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/monster/monster.obj");
+    Model ourModel11("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/helicopter1/helicopter.obj");
     
     
     // draw in wireframe
@@ -185,7 +188,33 @@ int main()
          glm::vec3(16.0f, 1.2f, 25.0f),
          glm::vec3(-6.0f, 1.2f, 137.0f)
      };
-
+     glm::vec3 soldierPositions[] = {
+       glm::vec3(25.0f, 0.0f, -25.0f),
+       glm::vec3(13.0f, 0.0f, 20.0f),
+       glm::vec3(5.0f, 0.0f, 110.0f),
+       glm::vec3(4.5f,  0.0f, 140.0f),
+       glm::vec3(10.0f,  0.0f, 0.0f),
+       glm::vec3(10.0f,  0.0f, 80.0f),
+       glm::vec3(12.0f, 0.0f, 140.0f),
+       glm::vec3(-3.0f, 0.0f, 150.0f),
+     };
+     glm::vec3 monsterPositions[] = {
+         glm::vec3(-3.0f, 0.0f, 160.0f),
+         glm::vec3(-5.0f, 0.0f, 165.0f),
+         glm::vec3(-2.0f, 0.0f, 155.0f),
+         glm::vec3(0.0f, 0.0f, 160.0f),
+         glm::vec3(2.0f, 0.0f, 165.0f),
+     };
+     glm::vec3 helicopterPositions[] = {
+       glm::vec3(30.0f, 50.0f, -25.0f),
+       glm::vec3(5.0f, 50.0f, 20.0f),
+       glm::vec3(-10.0f, 65.0f, 80.0f),
+       glm::vec3(5.0f,  50.0f, 130.0f),
+       glm::vec3(20.0f,  40.0f, 10.0f),
+       glm::vec3(10.0f,  40.0f, 80.0f),
+       glm::vec3(-12.0f,40.0f, 140.0f),
+       glm::vec3(-3.0f, 450.0f, 150.0f),
+     };
     camera.MovementSpeed = 10; //Optional. Modify the speed of the camera
     glm::vec3 lastCameraPos = glm::vec3(0.0f, 0.0f, 0.0f);
    
@@ -271,7 +300,6 @@ int main()
         ourShader.setMat4("model", gunModel);
         ourModel3.Draw(ourShader);
         
-        /*
         //Escombros
         for (int j = 0; j < 4; ++j) {
             glm::mat4 escombros = glm::mat4(1.0f);
@@ -283,7 +311,41 @@ int main()
             ourShader.setMat4("model", escombros);
             ourModel2.Draw(ourShader);
         }
-
+        // soldados
+        for (int j = 0; j < 8; ++j) {
+            glm::mat4 soldados = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            soldados = glm::translate(soldados, soldierPositions[j]);
+            // Escalar el modelo
+            soldados = glm::scale(soldados, glm::vec3(0.04f, 0.04f, 0.04f));
+            ourShader.use();
+            ourShader.setMat4("model", soldados);
+            ourModel9.Draw(ourShader);
+        }
+        //monster
+        for (int j = 0; j < 8; ++j) {
+            glm::mat4 monster = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            monster = glm::translate(monster, monsterPositions[j]);
+            monster = glm::rotate(monster, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
+            // Escalar el modelo
+            monster = glm::scale(monster, glm::vec3(0.2f, 0.2f, 0.2f));
+            ourShader.use();
+            ourShader.setMat4("model", monster);
+            ourModel10.Draw(ourShader);
+        }
+        //helicopter
+        for (int j = 0; j < 8; ++j) {
+            glm::mat4 helicopter = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            helicopter = glm::translate(helicopter, helicopterPositions[j]);
+            helicopter = glm::rotate(helicopter, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
+            // Escalar el modelo
+            helicopter = glm::scale(helicopter, glm::vec3(0.01f, 0.01f, 0.01f));
+            ourShader.use();
+            ourShader.setMat4("model", helicopter);
+            ourModel11.Draw(ourShader);
+        }
         // Bucle para renderizar un modelo en cada posición del arreglo
         for (int i = 0; i < 4; ++i) {
 
@@ -326,7 +388,7 @@ int main()
         ourShader.use();
         ourShader.setMat4("model", damage);
         ourModel5.Draw(ourShader);
-        */
+        
       //portal
         float angle = glfwGetTime() * 50.0f; // Ángulo de rotación negativo para girar en sentido horario
         glm::mat4 modelP = glm::mat4(1.0f);
