@@ -108,51 +108,8 @@ int main()
      float a = 6.2;
      glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
      glm::vec3 dirLightDirection((238.684, 554.131, 374.902));
-     glm::vec3 pointLightPositions[] = {
-         glm::vec3(67.4885, a, -24.4653),
-         glm::vec3(50.1336, a, -40.9756),
-         glm::vec3(57.476, a, -24.4264),
-         glm::vec3(35.7485, a, -23.374),
-         glm::vec3(42.0412, a, -6.00715),
-         glm::vec3(26.2719, a, -9.03249),
-         glm::vec3(33.732, a, 8.56284),
-         glm::vec3(28.8901, a, 25.8085),
-         glm::vec3(15.2973, a, 25.6666),
-         glm::vec3(26.6795, a, 42.8372),
-         glm::vec3(13.1852, a, 42.5504),
-         glm::vec3(13.232, a, 59.9155),
-         glm::vec3(26.1219, a, 60.4521),
-         glm::vec3(26.1037, a, 77.6029),
-         glm::vec3(15.595, a, 94.5348),
-         glm::vec3(26.1621, a, 96.3266),
-         glm::vec3(36.1572, a, 96.3039),
-         glm::vec3(26.1296, a, 112.234),
-         glm::vec3(15.5845, a, 114.604),
-         glm::vec3(15.5379, a, 132.134),
-         glm::vec3(26.1238, a, 131.606),
-         glm::vec3(26.156, a, 148.905),
-         glm::vec3(15.5635, a, 148.835),
-         glm::vec3(26.1346, a, 165.79),
-         glm::vec3(15.533, a, 168.69),
-         glm::vec3(26.4672, a, 182.651),
-         glm::vec3(16.0294, a, 198.721),
-         glm::vec3(26.931, a, 202.744),
-         glm::vec3(16.0296, a, 220.602),
-         glm::vec3(16.063, a, 235.319),
-         glm::vec3(29.3722, a, 234.931),
-         glm::vec3(16.4238, a, 252.448),
-         glm::vec3(29.2886, a, 254.391),
-         glm::vec3(14.6747, a, 269.381),
-         glm::vec3(27.8113, a, 271.905),
-         glm::vec3(23.8671, a, 288.899),
-         glm::vec3(10.5307, a, 286.794),
-         glm::vec3(17.0886, a, 306.348),
-         glm::vec3(1.57443, a, 304.232),
-         glm::vec3(6.06977, a, 323.443),
-         glm::vec3(-12.3373, a, 321.888),
-         glm::vec3(-6.37879, a, 338.864),
-         glm::vec3(-22.3302, a, 321.898)
-     };
+     
+    //POSICION DE LAS LAMPARAS
    
      glm::vec3 carPositions[] = {
          //carroviejo
@@ -169,10 +126,10 @@ int main()
 
      glm::vec3 rotationAngles[] = {
          //carroviejo
-         glm::vec3(10.0f, 0.0f, 180.0f), // 羘gulos para el primer modelo
-         glm::vec3(0.0f,  0.0f, 0.01f), // 羘gulos para el segundo modelo
-         glm::vec3(0.0f,  0.0f, 0.01f), // 羘gulos para el tercer modelo
-         glm::vec3(0.0f,  0.0f, 130.0f), // 羘gulos para el cuarto modelo
+         glm::vec3(10.0f, 0.0f, 180.0f), // 脕ngulos para el primer modelo
+         glm::vec3(0.0f,  0.0f, 0.01f), // 脕ngulos para el segundo modelo
+         glm::vec3(0.0f,  0.0f, 0.01f), // 脕ngulos para el tercer modelo
+         glm::vec3(0.0f,  0.0f, 130.0f), // 脕ngulos para el cuarto modelo
          //blackcar
          glm::vec3(50.0f, 90.0f, 90.0f),
          glm::vec3(0.0f,  0.0f, 0.01f),
@@ -276,7 +233,7 @@ int main()
         //Escombros
         for (int j = 0; j < 4; ++j) {
             glm::mat4 escombros = glm::mat4(1.0f);
-            // Posicionar el modelo en la posici髇 de la luz
+            // Posicionar el modelo en la posici贸n de la luz
             escombros = glm::translate(escombros, escombrosPosition[j]);
             // Escalar el modelo
             escombros = glm::scale(escombros, glm::vec3(0.1f, 0.1f, 0.1f));
@@ -285,21 +242,21 @@ int main()
             ourModel2.Draw(ourShader);
         }
 
-        // Bucle para renderizar un modelo en cada posici髇 del arreglo
+        // Bucle para renderizar un modelo en cada posici贸n del arreglo
         for (int i = 0; i < 4; ++i) {
 
             //carroviejo
             glm::mat4 model1 = glm::mat4(1.0f);
-            // Posicionar el modelo en la posici髇 de la luz
+            // Posicionar el modelo en la posici贸n de la luz
             model1 = glm::translate(model1, carPositions[i]);
-            // Aplicar una rotaci髇 diferente a cada modelo
+            // Aplicar una rotaci贸n diferente a cada modelo
             float angleX = glm::radians(rotationAngles[i].x);
             float angleY = glm::radians(rotationAngles[i].y);
             float angleZ = glm::radians(rotationAngles[i].z);
             // Combinar rotaciones en los tres ejes
-            model1 = glm::rotate(model1, angleX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotaci髇 alrededor del eje X
-            model1 = glm::rotate(model1, angleY, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotaci髇 alrededor del eje Y
-            model1 = glm::rotate(model1, angleZ, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotaci髇 alrededor del eje Z
+            model1 = glm::rotate(model1, angleX, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotaci贸n alrededor del eje X
+            model1 = glm::rotate(model1, angleY, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotaci贸n alrededor del eje Y
+            model1 = glm::rotate(model1, angleZ, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotaci贸n alrededor del eje Z
             // Escalar el modelo
             model1 = glm::scale(model1, glm::vec3(0.01f, 0.01f, 0.01f));
             ourShader.use();
@@ -312,9 +269,9 @@ int main()
             float angle1 = glm::radians(rotationAngles[i+4].x);
             float angle2 = glm::radians(rotationAngles[i+4].y);
             float angle3 = glm::radians(rotationAngles[i+4].z);
-            black = glm::rotate(black, angle1, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotaci髇 alrededor del eje X
-            black = glm::rotate(black, angle2, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotaci髇 alrededor del eje Y
-            black = glm::rotate(black, angle3, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotaci髇 alrededor del eje Z
+            black = glm::rotate(black, angle1, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotaci贸n alrededor del eje X
+            black = glm::rotate(black, angle2, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotaci贸n alrededor del eje Y
+            black = glm::rotate(black, angle3, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotaci贸n alrededor del eje Z
             black = glm::scale(black, glm::vec3(1.0f, 1.0f, 1.0f));
             ourShader.use();
             ourShader.setMat4("model", black);
@@ -329,34 +286,34 @@ int main()
         ourModel5.Draw(ourShader);
         */
       //portal
-        float angle = glfwGetTime() * 50.0f; // 羘gulo de rotaci髇 negativo para girar en sentido horario
+        float angle = glfwGetTime() * 50.0f; // 脕ngulo de rotaci贸n negativo para girar en sentido horario
         glm::mat4 modelP = glm::mat4(1.0f);
         modelP = glm::translate(modelP, glm::vec3(-5.0f, 15.0f, 0.0f)); // Mantener en el centro de la escena
-        modelP = glm::rotate(modelP, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotaci髇 alrededor del eje Y
+        modelP = glm::rotate(modelP, glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotaci贸n alrededor del eje Y
         modelP = glm::scale(modelP, glm::vec3(1.0f, 1.0f, 1.0f)); // Escala normal para el primer modelo
-        ourShader.use(); // Aseg鷕ate de usar el shader correcto
+        ourShader.use(); // Aseg煤rate de usar el shader correcto
         ourShader.setMat4("model", modelP);
         ourModel6.Draw(ourShader);
         //dragon
-        float time = glfwGetTime(); // Obt閚 el tiempo actual
+        float time = glfwGetTime(); // Obt茅n el tiempo actual
         float amplitude = 5.0f; // Amplitud del movimiento hacia arriba y hacia abajo
-        float frequency = 2.5f; // Frecuencia del movimiento (cu醤 r醦ido oscila)
+        float frequency = 2.5f; // Frecuencia del movimiento (cu谩n r谩pido oscila)
 
         glm::mat4 modelD = glm::mat4(1.0f);
-        float yOffset = amplitude * sin(frequency * time); // C醠culo del desplazamiento en Y basado en una funci髇 seno
+        float yOffset = amplitude * sin(frequency * time); // C谩lculo del desplazamiento en Y basado en una funci贸n seno
         modelD = glm::translate(modelD, glm::vec3(-5.0f, 25.0f + yOffset, -1.0f)); // Mantener en el centro de la escena con movimiento oscilante
         modelD = glm::rotate(modelD, glm::radians(35.0f), glm::vec3(1.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
         modelD = glm::scale(modelD, glm::vec3(5.0f, 5.0f, 5.0f)); // Escala normal para el primer modelo
-        ourShader.use(); // Aseg鷕ate de usar el shader correcto
+        ourShader.use(); // Aseg煤rate de usar el shader correcto
         ourShader.setMat4("model", modelD);
         ourModel7.Draw(ourShader);
         //godzilla
         glm::mat4 modelG = glm::mat4(1.0f);
-        float yOffset1 = 2.5 * sin(2 * glfwGetTime()); // C醠culo del desplazamiento en Y basado en una funci髇 seno
+        float yOffset1 = 2.5 * sin(2 * glfwGetTime()); // C谩lculo del desplazamiento en Y basado en una funci贸n seno
         modelG = glm::translate(modelG, glm::vec3(20.0f, -90.0f + yOffset1, -80.0f)); // Mantener en el centro de la escena
         modelG = glm::rotate(modelG, glm::radians(45.0f), glm::vec3(.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
         modelG = glm::scale(modelG, glm::vec3(85.0f, 85.0f, 85.0f)); // Escala normal para el primer modelo
-        ourShader.use(); // Aseg鷕ate de usar el shader correcto
+        ourShader.use(); // Aseg煤rate de usar el shader correcto
         ourShader.setMat4("model", modelG);
         ourModel8.Draw(ourShader);
         // Print the camera position
