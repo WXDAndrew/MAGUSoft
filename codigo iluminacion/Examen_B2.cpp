@@ -88,13 +88,13 @@ int main()
     //Shader lCShader("shaders/lightcube_vertexshader_B2.vs", "shaders/lightcube_fragmentshader_B2.fs");
 
     // load models
+    //Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mezcla4/mezcla4.obj");
     Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
-    Model ourModel2("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mounstro/mounstro.obj");
-    Model ourModel3("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/armaconlinterna/arma.obj");
-    //Model ourModel1("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/carroviejo1/carroviejo.obj");
-    //Model ourModel4("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/escombros/escombros.obj");
+    Model ourModel1("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/armaconlinterna/arma.obj");
+    //Model ourModel2("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/escombros/escombros.obj");
+    //Model ourModel3("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/carroviejo1/carroviejo.obj");
+    //Model ourModel4("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/blackcar/blackcar.obj");
     //Model ourModel5("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/damagecar/damagecar.obj");
-    //Model ourModel6("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/blackcar/blackcar.obj");
     
     
     // draw in wireframe
@@ -279,10 +279,22 @@ int main()
         ourModel3.Draw(ourShader);
         
         /*
+        //Escombros
+        for (int j = 0; j < 4; ++j) {
+            glm::mat4 escombros = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            escombros = glm::translate(escombros, escombrosPosition[j]);
+            // Escalar el modelo
+            escombros = glm::scale(escombros, glm::vec3(0.1f, 0.1f, 0.1f));
+            ourShader.use();
+            ourShader.setMat4("model", escombros);
+            ourModel2.Draw(ourShader);
+        }
+
         // Bucle para renderizar un modelo en cada posición del arreglo
         for (int i = 0; i < 4; ++i) {
 
-            //bluecar
+            //carroviejo
             glm::mat4 model1 = glm::mat4(1.0f);
             // Posicionar el modelo en la posición de la luz
             model1 = glm::translate(model1, carPositions[i]);
@@ -298,7 +310,7 @@ int main()
             model1 = glm::scale(model1, glm::vec3(0.01f, 0.01f, 0.01f));
             ourShader.use();
             ourShader.setMat4("model", model1);
-            ourModel1.Draw(ourShader);
+            ourModel3.Draw(ourShader);
 
             //blackcar
             glm::mat4 black = glm::mat4(1.0f);
@@ -312,7 +324,7 @@ int main()
             black = glm::scale(black, glm::vec3(1.0f, 1.0f, 1.0f));
             ourShader.use();
             ourShader.setMat4("model", black);
-            ourModel6.Draw(ourShader);
+            ourModel4.Draw(ourShader);
         }
 
         //damagecar
@@ -322,19 +334,6 @@ int main()
         ourShader.use();
         ourShader.setMat4("model", damage);
         ourModel5.Draw(ourShader);
-
-
-        //Escombros
-        for (int j = 0; j < 4; ++j) {
-            glm::mat4 escombros = glm::mat4(1.0f);
-            // Posicionar el modelo en la posición de la luz
-            escombros = glm::translate(escombros, escombrosPosition[j]);
-            // Escalar el modelo
-            escombros = glm::scale(escombros, glm::vec3(0.1f, 0.1f, 0.1f));
-            ourShader.use();
-            ourShader.setMat4("model", escombros);
-            ourModel4.Draw(ourShader);
-        }
         */
         // Print the camera position
         //COMENTAR ESTA PARTE PARA QUE NO SE IMPRIMAN COORDENADAS
