@@ -110,6 +110,48 @@ int main()
      glm::vec3 dirLightDirection((238.684, 554.131, 374.902));
      
     //POSICION DE LAS LAMPARAS
+    glm::vec3 pointLightPositions[] = {
+        glm::vec3(57.4836, a, -24.4376),
+        glm::vec3(40.1429, a, -40.9804),
+        glm::vec3(25.7346, a, -23.3442),
+        glm::vec3(42.052, a, -5.97245),
+        glm::vec3(16.2731, a, -9.01616),
+        glm::vec3(33.7424, a, 8.56258),
+        glm::vec3(28.9109, a, 25.806),
+        glm::vec3(5.33113, a, 25.6271),
+        glm::vec3(3.19505, a, 42.544),
+        glm::vec3(26.677, a, 42.8471),
+        glm::vec3(26.1763, a, 60.4384),
+        glm::vec3(3.18732, a, 59.9176),
+        glm::vec3(26.1534, a, 77.5773),
+        glm::vec3(26.1683, a, 96.3224),
+        glm::vec3(5.52788, a, 94.6095),
+        glm::vec3(5.51493, a, 114.647),
+        glm::vec3(26.1719, a, 112.191),
+        glm::vec3(26.161, a, 131.569),
+        glm::vec3(5.51548, a, 132.177),
+        glm::vec3(5.52469, a, 148.866),
+        glm::vec3(26.1643, a, 148.877),
+        glm::vec3(26.1828, a, 165.764),
+        glm::vec3(5.5171, a, 168.731),
+        glm::vec3(26.5008, a, 182.634),
+        glm::vec3(26.9515, a, 202.725),
+        glm::vec3(6.03625, a, 198.751),
+        glm::vec3(6.03916, a, 220.63),
+        glm::vec3(6.03529, a, 235.315),
+        glm::vec3(29.3727, a, 234.874),
+        glm::vec3(29.3436, a, 254.407),
+        glm::vec3(6.38009, a, 252.469),
+        glm::vec3(4.65171, a, 269.408),
+        glm::vec3(27.8027, a, 271.896),
+        glm::vec3(23.862, a, 288.88),
+        glm::vec3(0.50749, a, 286.789),
+        glm::vec3(-8.46366, a, 304.207),
+        glm::vec3(17.0845, a, 306.298),
+        glm::vec3(6.11738, a, 323.436),
+        glm::vec3(-6.3792, a, 338.899),
+        glm::vec3(-22.3739, a, 321.873)
+    };
    
      glm::vec3 carPositions[] = {
          //carroviejo
@@ -180,7 +222,7 @@ int main()
         
          
         // point lights****PARA LAS LAMPARAS
-        for (unsigned int i = 0; i < 43; i++)
+        for (unsigned int i = 0; i < 40; i++)
         {
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].position", pointLightPositions[i]);
             ourShader.setVec3("pointLights[" + std::to_string(i) + "].ambient", 0.0f, 0.0f, 0.0f);
