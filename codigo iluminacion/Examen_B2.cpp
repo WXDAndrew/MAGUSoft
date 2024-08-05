@@ -89,19 +89,21 @@ int main()
 
     // load models
     //Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mezcla4/mezcla4.obj");
-    Model ourModel0("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
+    // load models
+    //Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/mezcla4/mezcla4.obj");
+    Model ourModel("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/aftertherain/aftertherain.obj");
     Model ourModel1("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/armaconlinterna/arma.obj");
-    //Model ourModel2("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/escombros/escombros.obj");
-    //Model ourModel3("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/carroviejo1/carroviejo.obj");
-    //Model ourModel4("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/blackcar/blackcar.obj");
-    //Model ourModel5("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/damagecar/damagecar.obj");
+    Model ourModel2("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/escombros/escombros.obj");
+    Model ourModel3("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/carroviejo1/carroviejo.obj");
+    Model ourModel4("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/blackcar/blackcar.obj");
+    Model ourModel5("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/damagecar/damagecar.obj");
     Model ourModel6("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/portal3/portal3.obj");
     Model ourModel7("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/dragon/dragon.obj");
     Model ourModel8("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/godzilla/godzilla.obj");
-    Model ourModel9("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/soldado1/soldado1.obj");
-    Model ourModel10("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/monster/monster.obj");
-    Model ourModel11("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/helicopter1/helicopter.obj");
-    
+    Model ourModel9("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/monster/monster.obj");
+    Model ourModel10("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/helicopter1/helicopter.obj");
+    Model ourModel11("D:/EPN SEMESTRES/ComputacionGrafica/OpenGL/OpenGL/model/soldado1/soldado1.obj");
+    Model ourModel12("C:/Users/fiall/Documents/Visual Studio 2022/P1_E1_BlackWindow/P1_E1_BlackWindow/model/militar/militar.obj");
     
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -156,47 +158,57 @@ int main()
         glm::vec3(-22.3739, a, 321.873)
     };
    
-     glm::vec3 carPositions[] = {
-         //carroviejo
-         glm::vec3(18.0f, 1.7f, -28.0f),
-         glm::vec3(9.0f, 0.0f, 20.0f),
-         glm::vec3(9.0f, 0.01f, 110.0f),
-         glm::vec3(4.5f,  1.7f, 150.0f),
-         //blackcar
-         glm::vec3(6.7f,  1.58f, 0.0f),
-         glm::vec3(6.7f,  -0.1f, 80.0f),
-         glm::vec3(16.0f, 1.7f, 140.0f),
-         glm::vec3(-6.0f, 0.0f, 170.0f),
-     };
+    glm::vec3 carPositions[] = {
+        //carroviejo
+        glm::vec3(18.0f, 1.7f, -28.0f),
+        glm::vec3(9.0f, 0.0f, 20.0f),
+        glm::vec3(9.0f, 0.01f, 110.0f),
+        glm::vec3(4.5f,  1.7f, 150.0f),
+        //blackcar
+        glm::vec3(6.7f,  1.58f, 0.0f),
+        glm::vec3(6.7f,  -0.1f, 80.0f),
+        glm::vec3(11.0f, 0.5f, 150.0f),
+        glm::vec3(-6.0f, 0.0f, 170.0f),
+    };
 
-     glm::vec3 rotationAngles[] = {
-         //carroviejo
-         glm::vec3(10.0f, 0.0f, 180.0f), // Ángulos para el primer modelo
-         glm::vec3(0.0f,  0.0f, 0.01f), // Ángulos para el segundo modelo
-         glm::vec3(0.0f,  0.0f, 0.01f), // Ángulos para el tercer modelo
-         glm::vec3(0.0f,  0.0f, 130.0f), // Ángulos para el cuarto modelo
-         //blackcar
-         glm::vec3(50.0f, 90.0f, 90.0f),
-         glm::vec3(0.0f,  0.0f, 0.01f),
-         glm::vec3(-102.0f, 0.0f, 60.0f),
-         glm::vec3(0.0f,  0.0f, 0.01f),
-     };
+    glm::vec3 rotationAngles[] = {
+        //carroviejo
+        glm::vec3(10.0f, 0.0f, 180.0f), // Ángulos para el primer modelo
+        glm::vec3(0.0f,  0.0f, 0.01f), // Ángulos para el segundo modelo
+        glm::vec3(0.0f,  0.0f, 0.01f), // Ángulos para el tercer modelo
+        glm::vec3(0.0f,  0.0f, 130.0f), // Ángulos para el cuarto modelo
+        //blackcar
+        glm::vec3(50.0f, 90.0f, 90.0f),
+        glm::vec3(0.0f,  0.0f, 0.01f),
+        glm::vec3(-10.0f, 0.0f, 60.0f),
+        glm::vec3(0.0f,  0.0f, 0.01f),
+    };
 
-     glm::vec3 escombrosPosition[] = {
-         glm::vec3(16.0f, 1.2f, 87.0f),
-         glm::vec3(16.0f, 1.2f, 45.0f),
-         glm::vec3(16.0f, 1.2f, 25.0f),
-         glm::vec3(-6.0f, 1.2f, 137.0f)
-     };
+    glm::vec3 escombrosPosition[] = {
+        glm::vec3(16.0f, 1.2f, 87.0f),
+        glm::vec3(16.0f, 1.2f, 45.0f),
+        glm::vec3(16.0f, 1.2f, 25.0f),
+        glm::vec3(8.0f,  1.2f, 137.0f)
+    };
+
      glm::vec3 soldierPositions[] = {
-       glm::vec3(25.0f, 0.0f, -25.0f),
-       glm::vec3(13.0f, 0.0f, 20.0f),
-       glm::vec3(5.0f, 0.0f, 110.0f),
-       glm::vec3(4.5f,  0.0f, 140.0f),
-       glm::vec3(10.0f,  0.0f, 0.0f),
-       glm::vec3(10.0f,  0.0f, 80.0f),
-       glm::vec3(12.0f, 0.0f, 140.0f),
-       glm::vec3(-3.0f, 0.0f, 150.0f),
+        glm::vec3(25.0f, 0.0f, -25.0f),
+        glm::vec3(13.0f, 0.0f, 20.0f),
+        glm::vec3(5.0f, 0.0f, 110.0f),
+        glm::vec3(4.5f,  0.0f, 140.0f),
+        glm::vec3(10.0f,  0.0f, 0.0f),
+        glm::vec3(10.0f,  0.0f, 80.0f),
+        glm::vec3(12.0f, 0.0f, 140.0f),
+        glm::vec3(-3.0f, 0.0f, 150.0f),
+       //FE
+         glm::vec3(8.0f, 0.0f, -30.0f),
+         glm::vec3(9.0f, 0.0f, 24.0f),
+         glm::vec3(10.0f,0.0f, 110.0f),
+         glm::vec3(11.5f,0.0f, 140.0f),
+         glm::vec3(12.0f,0.0f, 5.0f),
+         glm::vec3(13.0f,0.0f, 100.0f),
+         glm::vec3(14.0f,0.0f, 30.0f),
+         glm::vec3(15.0f,0.0f, 50.0f),
      };
      glm::vec3 monsterPositions[] = {
          glm::vec3(-3.0f, 0.0f, 160.0f),
@@ -298,7 +310,7 @@ int main()
 
         gunModel = glm::scale(gunModel, glm::vec3(0.1f, 0.1f, 0.1f));
         ourShader.setMat4("model", gunModel);
-        ourModel3.Draw(ourShader);
+        ourModel1.Draw(ourShader);
         
         //Escombros
         for (int j = 0; j < 4; ++j) {
@@ -311,41 +323,7 @@ int main()
             ourShader.setMat4("model", escombros);
             ourModel2.Draw(ourShader);
         }
-        // soldados
-        for (int j = 0; j < 8; ++j) {
-            glm::mat4 soldados = glm::mat4(1.0f);
-            // Posicionar el modelo en la posición de la luz
-            soldados = glm::translate(soldados, soldierPositions[j]);
-            // Escalar el modelo
-            soldados = glm::scale(soldados, glm::vec3(0.04f, 0.04f, 0.04f));
-            ourShader.use();
-            ourShader.setMat4("model", soldados);
-            ourModel9.Draw(ourShader);
-        }
-        //monster
-        for (int j = 0; j < 8; ++j) {
-            glm::mat4 monster = glm::mat4(1.0f);
-            // Posicionar el modelo en la posición de la luz
-            monster = glm::translate(monster, monsterPositions[j]);
-            monster = glm::rotate(monster, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
-            // Escalar el modelo
-            monster = glm::scale(monster, glm::vec3(0.2f, 0.2f, 0.2f));
-            ourShader.use();
-            ourShader.setMat4("model", monster);
-            ourModel10.Draw(ourShader);
-        }
-        //helicopter
-        for (int j = 0; j < 8; ++j) {
-            glm::mat4 helicopter = glm::mat4(1.0f);
-            // Posicionar el modelo en la posición de la luz
-            helicopter = glm::translate(helicopter, helicopterPositions[j]);
-            helicopter = glm::rotate(helicopter, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
-            // Escalar el modelo
-            helicopter = glm::scale(helicopter, glm::vec3(0.01f, 0.01f, 0.01f));
-            ourShader.use();
-            ourShader.setMat4("model", helicopter);
-            ourModel11.Draw(ourShader);
-        }
+
         // Bucle para renderizar un modelo en cada posición del arreglo
         for (int i = 0; i < 4; ++i) {
 
@@ -370,9 +348,9 @@ int main()
             //blackcar
             glm::mat4 black = glm::mat4(1.0f);
             black = glm::translate(black, carPositions[i + 4]);
-            float angle1 = glm::radians(rotationAngles[i+4].x);
-            float angle2 = glm::radians(rotationAngles[i+4].y);
-            float angle3 = glm::radians(rotationAngles[i+4].z);
+            float angle1 = glm::radians(rotationAngles[i + 4].x);
+            float angle2 = glm::radians(rotationAngles[i + 4].y);
+            float angle3 = glm::radians(rotationAngles[i + 4].z);
             black = glm::rotate(black, angle1, glm::vec3(1.0f, 0.0f, 0.0f)); // Rotación alrededor del eje X
             black = glm::rotate(black, angle2, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotación alrededor del eje Y
             black = glm::rotate(black, angle3, glm::vec3(0.0f, 0.0f, 1.0f)); // Rotación alrededor del eje Z
@@ -381,6 +359,7 @@ int main()
             ourShader.setMat4("model", black);
             ourModel4.Draw(ourShader);
         }
+
         //damagecar
         glm::mat4 damage = glm::mat4(1.0f);
         damage = glm::translate(damage, glm::vec3(6.5f, -0.1f, 40.0f));
@@ -388,8 +367,8 @@ int main()
         ourShader.use();
         ourShader.setMat4("model", damage);
         ourModel5.Draw(ourShader);
-        
-      //portal
+
+        //portal
         float angle = glfwGetTime() * 50.0f; // Ángulo de rotación negativo para girar en sentido horario
         glm::mat4 modelP = glm::mat4(1.0f);
         modelP = glm::translate(modelP, glm::vec3(-5.0f, 15.0f, 0.0f)); // Mantener en el centro de la escena
@@ -398,6 +377,7 @@ int main()
         ourShader.use(); // Asegúrate de usar el shader correcto
         ourShader.setMat4("model", modelP);
         ourModel6.Draw(ourShader);
+
         //dragon
         float time = glfwGetTime(); // Obtén el tiempo actual
         float amplitude = 5.0f; // Amplitud del movimiento hacia arriba y hacia abajo
@@ -411,6 +391,8 @@ int main()
         ourShader.use(); // Asegúrate de usar el shader correcto
         ourShader.setMat4("model", modelD);
         ourModel7.Draw(ourShader);
+
+
         //godzilla
         glm::mat4 modelG = glm::mat4(1.0f);
         float yOffset1 = 2.5 * sin(2 * glfwGetTime()); // Cálculo del desplazamiento en Y basado en una función seno
@@ -420,6 +402,53 @@ int main()
         ourShader.use(); // Asegúrate de usar el shader correcto
         ourShader.setMat4("model", modelG);
         ourModel8.Draw(ourShader);
+
+        //monster
+        for (int j = 0; j < 8; ++j) {
+            glm::mat4 monster = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            monster = glm::translate(monster, monsterPositions[j]);
+            monster = glm::rotate(monster, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
+            // Escalar el modelo
+            monster = glm::scale(monster, glm::vec3(0.2f, 0.2f, 0.2f));
+            ourShader.use();
+            ourShader.setMat4("model", monster);
+            ourModel9.Draw(ourShader);
+        }
+
+        //helicopter
+        for (int j = 0; j < 8; ++j) {
+            glm::mat4 helicopter = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            helicopter = glm::translate(helicopter, helicopterPositions[j]);
+            helicopter = glm::rotate(helicopter, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)); // Rotar 35 grados alrededor del eje X
+            // Escalar el modelo
+            helicopter = glm::scale(helicopter, glm::vec3(0.01f, 0.01f, 0.01f));
+            ourShader.use();
+            ourShader.setMat4("model", helicopter);
+            ourModel10.Draw(ourShader);
+        }
+
+        // soldados
+        for (int j = 0; j < 8; ++j) {
+            glm::mat4 soldados = glm::mat4(1.0f);
+            // Posicionar el modelo en la posición de la luz
+            soldados = glm::translate(soldados, soldierPositions[j]);
+            // Escalar el modelo
+            soldados = glm::scale(soldados, glm::vec3(0.04f, 0.04f, 0.04f));
+            ourShader.use();
+            ourShader.setMat4("model", soldados);
+            ourModel11.Draw(ourShader);
+
+            //fuerzas especiales
+            glm::mat4 fuerza = glm::mat4(1.0f);
+            fuerza = glm::translate(fuerza, soldierPositions[j + 8]);
+            fuerza = glm::scale(fuerza, glm::vec3(0.01f, 0.01f, 0.01f));
+            ourShader.setMat4("model", fuerza);
+            ourModel12.Draw(ourShader);
+        }
+
+
         // Print the camera position
         //COMENTAR ESTA PARTE PARA QUE NO SE IMPRIMAN COORDENADAS
     
